@@ -2,10 +2,12 @@ package personal.rentSplitter;
 
 public class Bill {
     String billName;
+    String company;
     Double totalCost;
     Integer dateDueToCompany;
     Integer dateDueToPayer;
     Roommate payer;
+    Integer statementDate;
 
     public Roommate getPayer() {
         return payer;
@@ -25,5 +27,13 @@ public class Bill {
 
     public Double getTotalCost() {
         return totalCost;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public Integer getStatementDate() {
+        return statementDate;
     }
 }

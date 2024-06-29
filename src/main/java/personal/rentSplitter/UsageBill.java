@@ -1,16 +1,16 @@
 package personal.rentSplitter;
 
 public class UsageBill extends Bill {
-    Integer statementDate;
 
     public UsageBill(String billName, Double totalCost, Integer dateDueToCompany, Integer dateDueDueToPayer,
-            Roommate payer, Integer statementDate) {
+            Roommate payer, Integer statementDate, String company) {
         this.billName = billName;
         this.totalCost = totalCost;
         this.dateDueToPayer = dateDueDueToPayer;
         this.dateDueToCompany = dateDueToCompany;
         this.payer = payer;
         this.statementDate = statementDate;
+        this.company = company;
     }
 
     public UsageBill(String billName, Double totalCost, Integer dateDueToCompany, Integer dateDueDueToPayer,
@@ -55,4 +55,5 @@ public class UsageBill extends Bill {
     public void setRoommateDueDate(Integer dateDueToPayer) {
         this.dateDueToPayer = dateDueToPayer;
     }
+
 }
