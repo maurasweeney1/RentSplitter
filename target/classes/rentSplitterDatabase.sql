@@ -42,3 +42,5 @@ create table hasBills (
     FOREIGN KEY (username, password) REFERENCES user (username, password) ON DELETE CASCADE ON UPDATE NO ACTION,
     FOREIGN KEY (billID) REFERENCES bill (id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
+
+--  --

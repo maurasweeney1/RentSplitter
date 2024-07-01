@@ -25,11 +25,19 @@ public class Roommate {
         return name;
     }
 
+    public Boolean checkIfHome() {
+        return isHome;
+    }
+
     public void setifHome(Boolean isHome) {
         this.isHome = isHome;
     }
 
-    public Boolean checkIfHome() {
-        return isHome;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneNo(Integer phoneNo) {
+        this.phoneNo = phoneNo;
     }
 }

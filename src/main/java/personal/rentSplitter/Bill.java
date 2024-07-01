@@ -36,4 +36,32 @@ public class Bill {
     public Integer getStatementDate() {
         return statementDate;
     }
+
+    public void setBillName(String billName) {
+        this.billName = billName;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public void setDateDueToCompany(Integer dateDueToCompany) {
+        this.dateDueToCompany = dateDueToCompany;
+    }
+
+    public void setDateDueToPayer(Integer dateDueToPayer) {
+        this.dateDueToPayer = dateDueToPayer;
+    }
+
+    public void setPayer(Roommate payer) {
+        this.payer = payer;
+    }
+
+    public void setStatementDate(Integer statementDate) {
+        this.statementDate = statementDate;
+    }
 }

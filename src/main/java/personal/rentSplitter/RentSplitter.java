@@ -185,6 +185,169 @@ public class RentSplitter {
             System.out.println("error in type of bills in notifyPayer()");
         }
     }
-}
 
-// FIXME add editing roommates, bills, create/edit notifications
+    private void addNotification(ArrayList<Bill> billsList, ArrayList<Roommate> roommatesList) {
+        Scanner scan = new Scanner(System.in);
+        Boolean billNotFound = true;
+        Bill billToNotifyFor = new Bill();
+        // what type of notification do you wanna add
+        // for who
+        // for what bill
+        while (billNotFound) {
+            System.out.println("What bill would you like to create a notification for?\n");
+            String billName = scan.nextLine().toLowerCase();
+            for (Bill bill : billsList) {
+                if (billName == bill.getBillName()) {
+                    billToNotifyFor = bill;
+                    billNotFound = false;
+                }
+            }
+            System.out.println("Please enter one of your current bills");
+        }
+
+        while (true) {
+            System.out.println(
+                    "Would you like to create a notification for \na) all roommates to pay the payer \nb) the payer to pay the company \nc) both\n");
+            char userInput = scan.nextLine().toLowerCase().charAt(0);
+            switch (userInput) {
+                case 'a':
+                    notifyRoommates(roommatesList, billToNotifyFor);
+                    scan.close();
+                    return;
+                case 'b':
+                    notifyPayer(billToNotifyFor.getPayer(), billToNotifyFor, billToNotifyFor.getDueDateToCompany());
+                    scan.close();
+                    return;
+                case 'c':
+                    notifyPayer(billToNotifyFor.getPayer(), billToNotifyFor, billToNotifyFor.getDueDateToCompany());
+                    notifyRoommates(roommatesList, billToNotifyFor);
+                    scan.close();
+                    return;
+                default:
+                    System.out.println("Please enter either a, b, or c");
+                    break;
+            }
+        }
+    }
+
+    private void editRoommate(ArrayList<Roommate> roommateList) {
+        Scanner scan = new Scanner(System.in);
+        Boolean roommateNotFound = true;
+        Roommate roommateToEdit = new Roommate();
+        // which roommate
+
+        while (roommateNotFound) {
+            System.out.println("Which roommate would you like to edit?");
+            String roommateName = scan.nextLine().toLowerCase();
+            for (Roommate roommate : roommateList) {
+                if (roommate.getRoommateName() == roommateName) {
+                    roommateToEdit = roommate;
+                    roommateNotFound = false;
+                }
+            }
+            System.out.println("Please enter one of your current roommates' names");
+        }
+        System.out.println("What would you like to edit? \na) Name \nb) Phone number \nc) Location status");
+        char userInput = scan.nextLine().toLowerCase().charAt(0);
+        switch (userInput) {
+            case 'a':
+                System.out.println("Please enter new name:");
+                roommateToEdit.setName(scan.nextLine());
+                scan.close();
+                return;
+            case 'b':
+                System.out.println("Please enter new phone number:");
+                roommateToEdit.setPhoneNo(Integer.parseInt(scan.nextLine()));
+                scan.close();
+                return;
+            case 'c':
+                System.out.println("Please enter new location status (either \'home\' or \'not home\'):");
+                String status = scan.nextLine().toLowerCase();
+                if (status == "home") {
+                    roommateToEdit.setifHome(true);
+                } else if (status == "not home") {
+                    roommateToEdit.setifHome(false);
+                }
+                scan.close();
+                return;
+            default:
+                System.out.println("Please enter one of the given choices");
+                break;
+        }
+        scan.close();
+    }
+
+    private void editBill(ArrayList<Bill> billList, ArrayList<Roommate> roommateList) {
+        Scanner scan = new Scanner(System.in);
+        Boolean billNotFound = true;
+        Bill billToEdit = new Bill();
+        Boolean PayerNotFound = true;
+
+        while (billNotFound) {
+            System.out.println("Which bill would you like to edit?");
+            String billName = scan.nextLine().toLowerCase();
+            for (Bill bill : billList) {
+                if (bill.getBillName() == billName) {
+                    billToEdit = bill;
+                    billNotFound = false;
+                }
+            }
+            System.out.println("Please name one of your current bills");
+        }
+        System.out.println(
+                "What would you like to edit? \na) Bill name \nb) Company name \nc) This month's total cost \nd) Date due to company \ne) Date due to payer \nf) Payer \ng) Date statement is recieved");
+        char userInput = scan.nextLine().toLowerCase().charAt(0);
+        switch (userInput) {
+            case 'a':
+                System.out.println("Please enter new bill name: ");
+                billToEdit.setBillName(scan.nextLine());
+                scan.close();
+                return;
+            case 'b':
+                System.out.println("Please enter new company name: ");
+                billToEdit.setCompany(scan.nextLine());
+                scan.close();
+                return;
+            case 'c':
+                System.out.println("Please enter the total cost for the " + billToEdit.getBillName() + " this month: ");
+                billToEdit.setTotalCost(Double.parseDouble(scan.nextLine()));
+                scan.close();
+                return;
+            case 'd':
+                System.out.println("Please enter the new day each month the " + billToEdit.getBillName()
+                        + " payment is due to the company: ");
+                billToEdit.setDateDueToCompany(Integer.parseInt(scan.nextLine()));
+                scan.close();
+                return;
+            case 'e':
+                System.out.println("Please enter the new day each month the " + billToEdit.getBillName()
+                        + " payment is due to the payer: ");
+                billToEdit.setDateDueToPayer(Integer.parseInt(scan.nextLine()));
+                scan.close();
+                return;
+            case 'f':
+                while (PayerNotFound) {
+                    System.out.println("Please enter the new payer's name: ");
+                    String payerName = scan.nextLine();
+                    for (Roommate roommate : roommateList) {
+                        if (roommate.getRoommateName() == payerName) {
+                            billToEdit.setPayer(roommate);
+                            PayerNotFound = false;
+                        }
+                    }
+                    System.out.println("Please enter the name of one of your current roommates");
+                }
+                scan.close();
+                return;
+            case 'g':
+                System.out.println("Please enter the new day each month the bill statement will be recieved: ");
+                billToEdit.setStatementDate(Integer.parseInt(scan.nextLine()));
+                scan.close();
+                return;
+            default:
+                System.out.println("Please enter one of the given choices");
+                break;
+        }
+        scan.close();
+    }
+}
