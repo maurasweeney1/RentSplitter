@@ -181,7 +181,6 @@ public class RentSplitter {
                             + bill.getBillName());
                 }
             }
-
         } else {
             System.out.println("error in type of bills in notifyPayer()");
         }
