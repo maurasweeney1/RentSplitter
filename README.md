@@ -74,15 +74,6 @@ mvn exec:java -Dexec.mainClass="personal.rentSplitter.RentSplitter"
 - Bill editing and deletion
 - Roommate management
 
-### Development Tools
-
-- Java
-- MySQL Database
-- Maven
-- JUnit & Mockito for testing
-- Docker support
-- Code quality tools (Spotless, Checkstyle)
-
 ### Contributing
 
 To contribute to the project:
